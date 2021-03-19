@@ -162,6 +162,7 @@ class SummernoteUploadAttachment(UserPassesTestMixin, View):
                 print(a.id)
                 print(a.file.url)
 
+                attachment.url = attachment.id
                 attachments.append(attachment)
 
             return HttpResponse(render_to_string('django_summernote/upload_attachment.json', {
