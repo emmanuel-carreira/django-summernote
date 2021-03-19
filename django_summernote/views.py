@@ -143,11 +143,24 @@ class SummernoteUploadAttachment(UserPassesTestMixin, View):
                 # calling save method with attachment parameters as kwargs
                 attachment.save(**kwargs)
 
+                print('created attachment')
+                print(attachment.id)
+                print('file url:')
+                print(attachment.file.url)
+
                 # choose relative/absolute url by config
                 attachment.url = attachment.file.url
 
                 if self.config['attachment_absolute_uri']:
                     attachment.url = request.build_absolute_uri(attachment.url)
+
+                print('returned url:')
+                print(attachment.url)
+
+                a = klass.objects.get(id=attachment.id)
+                print('from db')
+                print(a.id)
+                print(a.file.url)
 
                 attachments.append(attachment)
 
